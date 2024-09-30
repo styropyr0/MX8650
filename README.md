@@ -8,7 +8,9 @@ Author: Saurav Sajeev
 
 1.1 Constants
 ---------
+
 Operational Modes
+
 1.	SLEEP_MODE_ADDR: 0x05
 2.	DISABLE_SLEEP: 0xA0
 3.	SLEEP_MODE_1: 0xB0
@@ -16,13 +18,17 @@ Operational Modes
 5.	FORCE_SLEEP_1: 0xB2
 6.	FORCE_SLEEP_2: 0xBC
 7.	FORCE_WAKEUP: 0xB1
+
 DPI Settings
+
 1.	DPI_ADDR: 0x06
 2.	DPI_800: 0x04
 3.	DPI_100: 0x05
 4.	DPI_1200: 0x06
 5.	DPI_1600: 0x07
+
 Sleep Frequencies
+
 1.	SLEEP1_FREQ_ADDR: 0x0A
 2.	SLEEP2_FREQ_ADDR: 0x0C
 3.	SLEEP_FREQ_LOW: 0x02
@@ -30,24 +36,36 @@ Sleep Frequencies
 5.	SLEEP_FREQ_HIGH: 0xF2
 6.	SLEEP1_FREQ_DEFAULT: 0x72
 7.	SLEEP2_FREQ_DEFAULT: 0x92
+
 Sleep Mode Enter Time
+
 1.	SLEEP_ENTER_TIME_ADDR: 0x0B
+
 Image Threshold
+
 1.	IMG_THRES_ADDR: 0x0D
+
 Image Recognition Rate
+
 1.	IMG_RECG_ADDR: 0x0E
 2.	IMG_RATE_HIGHEST: 0xE0
 3.	IMG_RATE_HIGH: 0x07
 4.	IMG_RATE_MED: 0x05
 5.	IMG_RATE_LOW: 0x09
 6.	IMG_RATE_LOWEST: 0x0F
+
 Motion Status
+
 1.	MOTION_STATUS_ADDR: 0x02
 2.	DELTA_X_ADDR: 0x03
 3.	DELTA_Y_ADDR: 0x04
+
 Image Quality
+
 1.	IMG_QUALITY_ADDR: 0x07
+
 Operation State
+
 1.	OPERATION_STATE_ADDR: 0x08
 
 1.2 Constructors
