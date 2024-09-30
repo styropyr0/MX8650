@@ -32,11 +32,11 @@ void MX8650::setUp()
     writeToSPI(0x80 | IMG_THRES_ADDR, 0x04);
     writeToSPI(0x80 | IMG_RECG_ADDR, IMG_RATE_HIGH);
 
-    MX8650::deviceFound = verify();
 }
 
 String MX8650::getLog()
 {
+    deviceFound = verify();
     if (deviceFound == true)
         return "Product ID: 0x" + getPID() + "\nOperational mode: 0x" + getOperationalMode() + "\nDPI: " + String(getDPI()) + "\nMotion status: " + getMotionStatus() + "\nMotion data: " + String(getMotionData()) + "\nDelta X: " + String(getDeltaX()) + "\tDelta Y: " + String(getDeltaY()) + "\nImage quality: " + String(getImageQuality()) + "\nOperation state: " + getOperationState() + "\nImage threshold: " + String(getImageThreshold()) + "\nImage recogonition rate: " + String(getImageRecRate());
     else
