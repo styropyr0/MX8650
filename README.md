@@ -5,6 +5,7 @@ This library facilitates communication with the MX8650 mouse controller, allowin
 Author: Saurav Sajeev
 
 **1. Class: MX8650** 
+
 1.1 Constants
 ---------
 Operational Modes
