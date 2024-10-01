@@ -73,15 +73,25 @@ Operation State
 
 1.2 Constructors
 ----------------
-1.	MX8650(uint8_t SCLK, uint8_t SDIO)
+**1.	MX8650(uint8_t SCLK, uint8_t SDIO)**
+
 Initializes the MX8650 Mouse controller for data transmission.
+
 SCLK: PIN to which the Serial Clock pin is attached.
+
 SDIO: PIN to which the Serial Data pins (both In and Out) are attached.
-2.	MX8650(uint8_t SCLK, uint8_t SDIO, uint8_t CS)
+
+
+**2.	MX8650(uint8_t SCLK, uint8_t SDIO, uint8_t CS)**
+
 Initializes the MX8650 Mouse controller for data transmission with an optional CS pin.
+
 SCLK: PIN to which the Serial Clock pin is attached.
+
 SDIO: PIN to which the Serial Data pins (both In and Out) are attached.
+
 CS: Optional external CS pin, typically a transistor's base pin.
+
 
 1.3 Public Methods
 ------------------
