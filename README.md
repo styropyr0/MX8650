@@ -3,7 +3,8 @@ MX8650 Library Documentation
 Overview
 --------
 This library facilitates communication with the MX8650 mouse controller, allowing for reading and writing data to its internal registers. It is essential to refer to the MX8650 datasheet before transferring data to the sensor registers.
-Author: Saurav Sajeev
+
+**Author: Saurav Sajeev**
 
 **1. Class: MX8650**
 --------------------
