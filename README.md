@@ -95,70 +95,132 @@ CS: Optional external CS pin, typically a transistor's base pin.
 
 1.3 Public Methods
 ------------------
-1.	String getLog()
+**1.	String getLog()**
+
 Retrieves the log output from the controller.
+
 Returns: Log output as a String.
-2.	void Log()
+
+**2.	void Log()**
+
 Prints the log output from the controller to the Serial monitor.
-3.	String getMotionStatus()
+
+**3.	String getMotionStatus()**
+
 Retrieves the Motion status.
+
 Returns: Motion status as a String.
-4.	uint8_t getMotionData()
+
+**4.	uint8_t getMotionData()**
+
 Retrieves the Motion data from the controller.
+
 Returns: Value of Motion data.
-5.	uint8_t getDeltaX()
+
+**5.	uint8_t getDeltaX()**
+
 Retrieves the change in motion data on the X-axis.
+
 Returns: Value of change in motion data on the X-axis.
-6.	uint8_t getDeltaY()
+
+**6.	uint8_t getDeltaY()**
+
 Retrieves the change in motion data on the Y-axis.
+
 Returns: Value of change in motion data on the Y-axis.
-7.	String getPID()
+
+**7.	String getPID()**
+
 Retrieves the Product ID of the controller.
+
 Returns: PID as a Hexadecimal String.
-8.	String getOperationalMode()
+
+**8.	String getOperationalMode()**
+
 Retrieves the Operational mode of the controller.
+
 Returns: Operational mode as a String.
-9.	uint8_t getImageQuality()
+
+**9.	uint8_t getImageQuality()**
+
 Retrieves the Image quality used by the sensor array.
+
 Returns: Image quality as uint8_t.
-10.	uint8_t getImageRecRate()
+
+**10.	uint8_t getImageRecRate()**
+
 Retrieves the rate of image recognition by the controller.
+
 Returns: Image recognition rate as uint8_t.
-11.	uint8_t getImageThreshold()
+
+**11.	uint8_t getImageThreshold()**
+
 Retrieves the Image threshold used by the Motion Estimation Engine.
+
 Returns: Image threshold as uint8_t.
-12.	String getOperationState()
+
+**12.	String getOperationState()**
+
 Retrieves the current Operation state.
+
 Returns: Operation state as a String.
-13.	uint16_t getDPI()
+
+**13.	uint16_t getDPI()**
+
 Retrieves the DPI (sensitivity) used by the Motion Estimation Engine.
+
 Returns: DPI as uint16_t.
-14.	void setDPI(uint8_t state)
+
+**14.	void setDPI(uint8_t state)**
+
 Sets the DPI. You may use the built-in DPI constants or refer to the datasheet.
+
 state: The DPI to set.
-15.	void setImageQuality(uint8_t quality)
+
+**15.	void setImageQuality(uint8_t quality)**
+
 Sets the Image quality. Refer to the datasheet before setting the image quality.
+
 quality: The Image quality to set.
-16.	void setOperationState(uint8_t state)
+
+**16.	void setOperationState(uint8_t state)**
+
 Sets the Operation state. Refer to the datasheet before setting the Operation state.
+
 state: The Operation state to set.
-17.	void setSleepSetting_1(uint8_t frequency)
+
+**17.	void setSleepSetting_1(uint8_t frequency)**
+
 Sets the frequency of Sleep mode 1. You may use the built-in Sleep frequency constants or refer to the datasheet before setting.
+
 frequency: The Sleep frequency to set.
-18.	void setSleepSetting_2(uint8_t frequency)
+
+**18.	void setSleepSetting_2(uint8_t frequency)**
+
 Sets the frequency of Sleep mode 2. You may use the built-in Sleep frequency constants or refer to the datasheet before setting.
+
 frequency: The Sleep frequency to set.
-19.	void setSleepEnterTime(uint8_t mode)
+
+**19.	void setSleepEnterTime(uint8_t mode)**
+
 Sets the time to enter both sleep modes separately. Refer to the datasheet before setting.
+
 mode: The time to enter sleep modes.
-20.	void setImageThreshold(uint8_t threshold)
+
+**20.	void setImageThreshold(uint8_t threshold)**
+
 Sets the Image threshold value. Refer to the datasheet before setting.
+
 threshold: The threshold to be used by the Motion Estimation Engine.
-21.	void setImageRecRate(uint8_t rate)
+
+**21.	void setImageRecRate(uint8_t rate)**
+
 Sets the Image recognition rate. You may use the built-in Image recognition rate constants or refer to the datasheet before setting.
+
 rate: The rate to be used by the Motion Estimation Engine.
 
-Note
+
+**Note**
 ----
 For more detailed information, always refer to the MX8650 datasheet.
 
