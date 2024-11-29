@@ -43,7 +43,7 @@ The MX8650 library simplifies communication with the **MX8650 Mouse Controller**
 ---
 
 ## **2. Hardware Requirements**
-- **Microcontroller**: Arduino-compatible board (e.g., UNO, Mega, Nano).
+- **Microcontroller**: Arduino and SPI compatible board (e.g., UNO, Mega, Nano).
 - **Pins**:
   - **SCLK**: Serial Clock for SPI communication.
   - **SDIO**: Serial Data Input/Output.
