@@ -1,226 +1,252 @@
-MX8650 Library Documentation
----------------------------
-Overview
---------
-This library facilitates communication with the MX8650 mouse controller, allowing for reading and writing data to its internal registers. It is essential to refer to the MX8650 datasheet before transferring data to the sensor registers.
+Here's a more **detailed README** that includes additional sections, explanations, and examples to better explain the library and its usage:
+
+---
 
-**Author: Saurav Sajeev**
+# **MX8650 Arduino Library**
 
-**1. Class: MX8650**
---------------------
+### **Overview**
 
-1.1 Constants
----------
+The MX8650 library simplifies communication with the **MX8650 Mouse Controller**, allowing users to interact with its internal registers, manage motion data, and configure sensor settings effectively. Designed for applications such as robotics, motion tracking, and embedded systems, this library provides robust functionality while abstracting low-level details.
 
-Operational Modes
+### **Author**  
+**Saurav Sajeev**
 
-1.	SLEEP_MODE_ADDR: 0x05
-2.	DISABLE_SLEEP: 0xA0
-3.	SLEEP_MODE_1: 0xB0
-4.	SLEEP_MODE_2: 0xB8
-5.	FORCE_SLEEP_1: 0xB2
-6.	FORCE_SLEEP_2: 0xBC
-7.	FORCE_WAKEUP: 0xB1
+---
 
-DPI Settings
+## **Table of Contents**
+1. [Features](#features)
+2. [Hardware Requirements](#hardware-requirements)
+3. [Installation](#installation)
+4. [Library Structure](#library-structure)
+5. [Getting Started](#getting-started)
+6. [Detailed API Reference](#detailed-api-reference)
+7. [Constants Reference](#constants-reference)
+8. [Examples](#examples)
+9. [Troubleshooting](#troubleshooting)
+10. [Contributing](#contributing)
+11. [License](#license)
 
-1.	DPI_ADDR: 0x06
-2.	DPI_800: 0x04
-3.	DPI_100: 0x05
-4.	DPI_1200: 0x06
-5.	DPI_1600: 0x07
+---
 
-Sleep Frequencies
+## **1. Features**
+- **Motion Data Management**:
+  - Retrieve motion status, X/Y deltas, and overall motion data.
+- **Dynamic DPI Control**:
+  - Change DPI settings using pre-defined constants or custom values.
+- **Image Sensor Configuration**:
+  - Set image quality, recognition rate, and thresholds.
+- **Low Power Modes**:
+  - Utilize built-in sleep modes to save power.
+- **Ease of Use**:
+  - Intuitive API for seamless integration into Arduino projects.
 
-1.	SLEEP1_FREQ_ADDR: 0x0A
-2.	SLEEP2_FREQ_ADDR: 0x0C
-3.	SLEEP_FREQ_LOW: 0x02
-4.	SLEEP_FREQ_MED: 0x07
-5.	SLEEP_FREQ_HIGH: 0xF2
-6.	SLEEP1_FREQ_DEFAULT: 0x72
-7.	SLEEP2_FREQ_DEFAULT: 0x92
+---
 
-Sleep Mode Enter Time
+## **2. Hardware Requirements**
+- **Microcontroller**: Arduino-compatible board (e.g., UNO, Mega, Nano).
+- **Pins**:
+  - **SCLK**: Serial Clock for SPI communication.
+  - **SDIO**: Serial Data Input/Output.
+  - **CS**: (Optional) Chip Select for external control.
 
-1.	SLEEP_ENTER_TIME_ADDR: 0x0B
+---
 
-Image Threshold
+## **3. Installation**
 
-1.	IMG_THRES_ADDR: 0x0D
+### Using the Arduino Library Manager
+1. Open the Arduino IDE.
+2. Go to **Sketch → Include Library → Manage Libraries**.
+3. Search for `MX8650` and click **Install**.
 
-Image Recognition Rate
+### Manual Installation
+1. Download the library as a ZIP file from [GitHub](https://github.com/styropyr0/MX8650).
+2. Open the Arduino IDE.
+3. Go to **Sketch → Include Library → Add .ZIP Library**.
+4. Select the downloaded ZIP file.
 
-1.	IMG_RECG_ADDR: 0x0E
-2.	IMG_RATE_HIGHEST: 0xE0
-3.	IMG_RATE_HIGH: 0x07
-4.	IMG_RATE_MED: 0x05
-5.	IMG_RATE_LOW: 0x09
-6.	IMG_RATE_LOWEST: 0x0F
+---
 
-Motion Status
+## **4. Library Structure**
 
-1.	MOTION_STATUS_ADDR: 0x02
-2.	DELTA_X_ADDR: 0x03
-3.	DELTA_Y_ADDR: 0x04
+### File Overview
+- `MX8650.h`: Header file defining the class and public API.
+- `MX8650.cpp`: Implementation of the MX8650 library.
+- `MX8650_Constants.h`: Pre-defined constants for registers and settings.
 
-Image Quality
+---
 
-1.	IMG_QUALITY_ADDR: 0x07
+## **5. Getting Started**
 
-Operation State
+### Initialization
+Include the library in your sketch and initialize the controller:
+```cpp
+#include "MX8650.h"
 
-1.	OPERATION_STATE_ADDR: 0x08
+// SCLK: 13, SDIO: 11
+MX8650 mouseController(13, 11);
 
-1.2 Constructors
-----------------
-**1.	MX8650(uint8_t SCLK, uint8_t SDIO)**
+void setup() {
+    Serial.begin(9600);
+    Serial.println("Initializing MX8650...");
+    mouseController.Log();  // Print initialization log
+}
 
-Initializes the MX8650 Mouse controller for data transmission.
+void loop() {
+    // Your application logic here
+}
+```
 
-SCLK: PIN to which the Serial Clock pin is attached.
+With an optional **CS pin**:
+```cpp
+MX8650 mouseController(13, 11, 10);  // SCLK, SDIO, CS
+```
 
-SDIO: PIN to which the Serial Data pins (both In and Out) are attached.
+---
 
+## **6. Detailed API Reference**
 
-**2.	MX8650(uint8_t SCLK, uint8_t SDIO, uint8_t CS)**
+### Constructors
+- **`MX8650(uint8_t SCLK, uint8_t SDIO)`**  
+  Initializes the MX8650 using the specified **SCLK** and **SDIO** pins.
 
-Initializes the MX8650 Mouse controller for data transmission with an optional CS pin.
+- **`MX8650(uint8_t SCLK, uint8_t SDIO, uint8_t CS)`**  
+  Same as above, but includes an optional **CS** pin for chip select.
 
-SCLK: PIN to which the Serial Clock pin is attached.
+### Motion Data
+- **`String getMotionStatus()`**  
+  Returns the motion status as a string.
 
-SDIO: PIN to which the Serial Data pins (both In and Out) are attached.
+- **`uint8_t getDeltaX()`**  
+  Retrieves the X-axis motion delta.
 
-CS: Optional external CS pin, typically a transistor's base pin.
+- **`uint8_t getDeltaY()`**  
+  Retrieves the Y-axis motion delta.
 
+- **`uint8_t getMotionData()`**  
+  Returns overall motion data.
 
-1.3 Public Methods
-------------------
-**1.	String getLog()**
+### Configuration
+- **`void setDPI(uint8_t state)`**  
+  Sets the DPI to one of the pre-defined constants (`DPI_800`, `DPI_1200`, etc.).
 
-Retrieves the log output from the controller.
+- **`void setImageQuality(uint8_t quality)`**  
+  Adjusts the image quality used by the sensor.
 
-Returns: Log output as a String.
+- **`void setImageRecRate(uint8_t rate)`**  
+  Sets the image recognition rate (e.g., `IMG_RATE_HIGH`).
 
-**2.	void Log()**
+- **`void setSleepMode(uint8_t mode)`**  
+  Configures the sleep mode (`SLEEP_MODE_1`, `FORCE_SLEEP_2`, etc.).
 
-Prints the log output from the controller to the Serial monitor.
+- **`void setSleepSetting_1(uint8_t frequency)`**  
+  Configures the frequency for Sleep Mode 1.
 
-**3.	String getMotionStatus()**
+### Logging and Debugging
+- **`String getLog()`**  
+  Retrieves the controller log as a string.
 
-Retrieves the Motion status.
+- **`void Log()`**  
+  Prints the log to the Serial Monitor.
 
-Returns: Motion status as a String.
+---
 
-**4.	uint8_t getMotionData()**
+## **7. Constants Reference**
 
-Retrieves the Motion data from the controller.
+### DPI Settings
+| Constant       | DPI Value |
+|----------------|-----------|
+| `DPI_800`      | 800       |
+| `DPI_1200`     | 1200      |
+| `DPI_1600`     | 1600      |
 
-Returns: Value of Motion data.
+### Sleep Modes
+| Constant           | Description        |
+|--------------------|--------------------|
+| `DISABLE_SLEEP`    | No sleep          |
+| `SLEEP_MODE_1`     | Enter Sleep Mode 1 |
+| `FORCE_SLEEP_2`    | Force Sleep Mode 2 |
 
-**5.	uint8_t getDeltaX()**
+### Recognition Rates
+| Constant             | Description        |
+|----------------------|--------------------|
+| `IMG_RATE_HIGH`      | High recognition rate |
+| `IMG_RATE_LOW`       | Low recognition rate  |
 
-Retrieves the change in motion data on the X-axis.
+---
 
-Returns: Value of change in motion data on the X-axis.
+## **8. Examples**
 
-**6.	uint8_t getDeltaY()**
+### Example 1: Basic Motion Tracking
+```cpp
+#include "MX8650.h"
 
-Retrieves the change in motion data on the Y-axis.
+MX8650 mouseController(13, 11);
 
-Returns: Value of change in motion data on the Y-axis.
+void setup() {
+    Serial.begin(9600);
+    Serial.println("Initializing...");
+    mouseController.setDPI(DPI_1200); // Set DPI to 1200
+}
 
-**7.	String getPID()**
+void loop() {
+    Serial.println("Motion Status: " + mouseController.getMotionStatus());
+    Serial.println("Delta X: " + String(mouseController.getDeltaX()));
+    Serial.println("Delta Y: " + String(mouseController.getDeltaY()));
+    delay(500);
+}
+```
 
-Retrieves the Product ID of the controller.
+### Example 2: Low-Power Sleep Mode
+```cpp
+#include "MX8650.h"
 
-Returns: PID as a Hexadecimal String.
+MX8650 mouseController(13, 11);
 
-**8.	String getOperationalMode()**
+void setup() {
+    Serial.begin(9600);
+    mouseController.setSleepMode(SLEEP_MODE_1);
+    mouseController.setSleepSetting_1(SLEEP_FREQ_LOW);
+}
 
-Retrieves the Operational mode of the controller.
+void loop() {
+    Serial.println("Entering low-power mode...");
+    delay(1000);
+}
+```
 
-Returns: Operational mode as a String.
+---
 
-**9.	uint8_t getImageQuality()**
+## **9. Troubleshooting**
 
-Retrieves the Image quality used by the sensor array.
+### Common Issues
+1. **No Response from Controller**:
+   - Verify the SCLK and SDIO pin connections.
+   - Ensure proper power supply to the MX8650.
 
-Returns: Image quality as uint8_t.
+2. **Incorrect Motion Data**:
+   - Check if the sensor is correctly positioned.
 
-**10.	uint8_t getImageRecRate()**
+3. **Compilation Errors**:
+   - Confirm the library is installed correctly.
 
-Retrieves the rate of image recognition by the controller.
+---
 
-Returns: Image recognition rate as uint8_t.
+## **10. Contributing**
 
-**11.	uint8_t getImageThreshold()**
+We welcome contributions to enhance this library! Follow these steps:
+1. **Fork the Repository**:  
+   ```bash
+   git clone https://github.com/<your-repo>/MX8650.git
+   ```
+2. **Create a Branch**:  
+   ```bash
+   git checkout -b feature-name
+   ```
+3. **Submit a Pull Request**:  
+   Include a description of your changes.
 
-Retrieves the Image threshold used by the Motion Estimation Engine.
+---
 
-Returns: Image threshold as uint8_t.
+## **11. License**
 
-**12.	String getOperationState()**
-
-Retrieves the current Operation state.
-
-Returns: Operation state as a String.
-
-**13.	uint16_t getDPI()**
-
-Retrieves the DPI (sensitivity) used by the Motion Estimation Engine.
-
-Returns: DPI as uint16_t.
-
-**14.	void setDPI(uint8_t state)**
-
-Sets the DPI. You may use the built-in DPI constants or refer to the datasheet.
-
-state: The DPI to set.
-
-**15.	void setImageQuality(uint8_t quality)**
-
-Sets the Image quality. Refer to the datasheet before setting the image quality.
-
-quality: The Image quality to set.
-
-**16.	void setOperationState(uint8_t state)**
-
-Sets the Operation state. Refer to the datasheet before setting the Operation state.
-
-state: The Operation state to set.
-
-**17.	void setSleepSetting_1(uint8_t frequency)**
-
-Sets the frequency of Sleep mode 1. You may use the built-in Sleep frequency constants or refer to the datasheet before setting.
-
-frequency: The Sleep frequency to set.
-
-**18.	void setSleepSetting_2(uint8_t frequency)**
-
-Sets the frequency of Sleep mode 2. You may use the built-in Sleep frequency constants or refer to the datasheet before setting.
-
-frequency: The Sleep frequency to set.
-
-**19.	void setSleepEnterTime(uint8_t mode)**
-
-Sets the time to enter both sleep modes separately. Refer to the datasheet before setting.
-
-mode: The time to enter sleep modes.
-
-**20.	void setImageThreshold(uint8_t threshold)**
-
-Sets the Image threshold value. Refer to the datasheet before setting.
-
-threshold: The threshold to be used by the Motion Estimation Engine.
-
-**21.	void setImageRecRate(uint8_t rate)**
-
-Sets the Image recognition rate. You may use the built-in Image recognition rate constants or refer to the datasheet before setting.
-
-rate: The rate to be used by the Motion Estimation Engine.
-
-
-**Note**
-----
-For more detailed information, always refer to the MX8650 datasheet.
-
+This library is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
