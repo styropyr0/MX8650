@@ -1,4 +1,4 @@
-#include "mx8650.h"
+#include <mx8650.h>
 
 // SCLK: 13, SDIO: 11
 MX8650 mouseController(13, 11);
