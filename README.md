@@ -76,7 +76,7 @@ The MX8650 library simplifies communication with the **MX8650 Mouse Controller**
 ### Initialization
 Include the library in your sketch and initialize the controller:
 ```cpp
-#include "mx8650.h"
+#include <mx8650.h>
 
 // SCLK: 13, SDIO: 11
 MX8650 mouseController(13, 11);
