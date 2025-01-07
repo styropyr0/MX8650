@@ -1,7 +1,3 @@
-Here's a more **detailed README** that includes additional sections, explanations, and examples to better explain the library and its usage:
-
----
-
 # **MX8650 Arduino Library**
 
 ### **Overview**
