@@ -10,17 +10,17 @@ The MX8650 library simplifies communication with the **MX8650 Mouse Controller**
 ---
 
 ## **Table of Contents**
-1. [Features](#features)
-2. [Hardware Requirements](#hardware-requirements)
-3. [Installation](#installation)
-4. [Library Structure](#library-structure)
-5. [Getting Started](#getting-started)
-6. [Detailed API Reference](#detailed-api-reference)
-7. [Constants Reference](#constants-reference)
-8. [Examples](#examples)
-9. [Troubleshooting](#troubleshooting)
-10. [Contributing](#contributing)
-11. [License](#license)
+1. [Features](#Features)
+2. [Hardware Requirements](#Hardware-Requirements)
+3. [Installation](#Installation)
+4. [Library Structure](#Library-Structure)
+5. [Getting Started](#Getting-Started)
+6. [Detailed API Reference](#Detailed-API-Reference)
+7. [Constants Reference](#Constants-Reference)
+8. [Examples](#Examples)
+9. [Troubleshooting](#Troubleshooting)
+10. [Contributing](#Contributing)
+11. [License](#License)
 
 ---
 
