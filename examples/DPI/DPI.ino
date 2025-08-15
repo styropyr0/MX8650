@@ -7,6 +7,7 @@ void setup()
 {
     Serial.begin(9600);
     Serial.println("Initializing MX8650...");
+    mouseController.begin();
 }
 
 void loop()
