@@ -5,8 +5,8 @@
 #define SDIO 12
 MX8650 mouseController(SCLK, SDIO);
 
-long long x = 0;
-long long y = 0;
+long x = 0;
+long y = 0;
 
 void setup()
 {
