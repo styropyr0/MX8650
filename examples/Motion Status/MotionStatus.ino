@@ -12,8 +12,8 @@ void setup()
 
 void loop()
 {
-    Serial.println("Motion Status: " + mouseController.getMotionStatus());
-    Serial.print("Delta X: " + mouseController.getDeltaX() + "\t");
-    Serial.println("Delta Y: " + mouseController.getDeltaY());
-    delay(100)
+    Serial.print("Motion Status: " + mouseController.getMotionStatus());
+    Serial.print("Delta X: " + String(mouseController.getDeltaX()) + "\t");
+    Serial.println("Delta Y: " + String(mouseController.getDeltaY()));
+    delay(100);
 }
