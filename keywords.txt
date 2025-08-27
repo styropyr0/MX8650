@@ -1,0 +1,68 @@
+#######################################
+# Syntax Coloring Map For MX8650
+#######################################
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+begin           KEYWORD2
+updateStatus    KEYWORD2
+dx              KEYWORD2
+dy              KEYWORD2
+motion          KEYWORD2
+dxOverflow      KEYWORD2
+dyOverflow      KEYWORD2
+motionDetected  KEYWORD2
+getMotionStatus KEYWORD2
+getDeltaX       KEYWORD2
+getDeltaY       KEYWORD2
+setDPI          KEYWORD2
+setSleepMode    KEYWORD2
+setImageRate    KEYWORD2
+setThreshold    KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+SLEEP_MODE_ADDR         LITERAL1
+DISABLE_SLEEP           LITERAL1
+SLEEP_MODE_1            LITERAL1
+SLEEP_MODE_2            LITERAL1
+FORCE_SLEEP_1           LITERAL1
+FORCE_SLEEP_2           LITERAL1
+FORCE_WAKEUP            LITERAL1
+
+DPI_ADDR                LITERAL1
+DPI_800                 LITERAL1
+DPI_100                 LITERAL1
+DPI_1200                LITERAL1
+DPI_1600                LITERAL1
+
+SLEEP1_FREQ_ADDR        LITERAL1
+SLEEP2_FREQ_ADDR        LITERAL1
+SLEEP_FREQ_LOW          LITERAL1
+SLEEP_FREQ_MED          LITERAL1
+SLEEP_FREQ_HIGH         LITERAL1
+SLEEP1_FREQ_DEFAULT     LITERAL1
+SLEEP2_FREQ_DEFAULT     LITERAL1
+
+SLEEP_ENTER_TIME_ADDR   LITERAL1
+
+IMG_THRES_ADDR          LITERAL1
+
+IMG_RECG_ADDR           LITERAL1
+IMG_RATE_HIGHEST        LITERAL1
+IMG_RATE_HIGH           LITERAL1
+IMG_RATE_MED            LITERAL1
+IMG_RATE_LOW            LITERAL1
+IMG_RATE_LOWEST         LITERAL1
+
+MOTION_STATUS_ADDR      LITERAL1
+DELTA_X_ADDR            LITERAL1
+DELTA_Y_ADDR            LITERAL1
+MOTION_BIT              LITERAL1
+DY_OVF_BIT              LITERAL1
+DX_OVF_BIT              LITERAL1
+
+IMG_QUALITY_ADDR        LITERAL1
+OPERATION_STATE_ADDR    LITERAL1

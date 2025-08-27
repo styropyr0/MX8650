@@ -7,10 +7,12 @@ void setup()
 {
     Serial.begin(9600);
     Serial.println("Initializing MX8650...");
+    mouseController.begin();
 }
 
 void loop()
 {
     mouseController.setDPI(DPI_1600);
-    Serial.println("DPI in use: " + mouseController.getDPI());
+    Serial.println("DPI in use: " + String(mouseController.getDPI()));
+    delay(1000);
 }
