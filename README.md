@@ -4,6 +4,13 @@
 
 The MX8650 library simplifies communication with the **MX8650 Mouse Controller**, allowing users to interact with its internal registers, manage motion data, and configure sensor settings effectively. Designed for applications such as robotics, motion tracking, and embedded systems, this library provides robust functionality while abstracting low-level details.
 
+[![GitHub release](https://img.shields.io/github/v/release/styropyr0/MX8650?label=release)](https://github.com/styropyr0/MX8650/releases)
+[![License](https://img.shields.io/github/license/styropyr0/MX8650)](https://github.com/styropyr0/MX8650/blob/main/LICENSE)
+[![Arduino Library Manager](https://www.ardu-badge.com/badge/MX8650%20Mouse%20sensor%20library.svg?)](https://www.ardu-badge.com/MX8650%20Mouse%20sensor%20library)
+[![GitHub stars](https://img.shields.io/github/stars/styropyr0/MX8650?style=social)](https://github.com/styropyr0/MX8650/stargazers)
+[![Build Status](https://github.com/styropyr0/MX8650/actions/workflows/ci.yml/badge.svg)](https://github.com/styropyr0/MX8650/actions)
+![Arduino Ready](https://img.shields.io/badge/Arduino-Ready-brightgreen)
+
 ### **Author**  
 **Saurav Sajeev**
 
