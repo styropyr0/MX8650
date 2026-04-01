@@ -60,6 +60,12 @@ The MX8650 library simplifies communication with the **MX8650 Mouse Controller**
 2. Go to **Sketch → Include Library → Manage Libraries**.
 3. Search for `MX8650` and click **Install**.
 
+## Circuit Diagram
+Please use a resistor in between MISO and MOSI, if you are using an ESP. On the ESP8266, the SPI hardware behaves differently. The MOSI line is always actively driven, even during read operations. As a result, when the sensor tries to drive data back on the SDIO line, the ESP8266’s MOSI output conflicts with it. This causes bus contention, which in practice shows up as corrupted or empty data. Place a resistor between the MOSI and MISO lines. This limits the drive strength of the ESP8266’s MOSI, allowing the sensor to override it during read operations and making the setup behave more like Arduino.
+
+![Circuit Diagram](circuit.png)
+
+
 ### Manual Installation
 1. Download the library as a ZIP file from [GitHub](https://github.com/styropyr0/MX8650).
 2. Open the Arduino IDE.
