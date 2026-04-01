@@ -19,32 +19,19 @@ MX8650::MX8650(uint8_t sclk, uint8_t sdio, uint8_t cs)
 void MX8650::setUp()
 {
     pinMode(SCLK, OUTPUT);
-    pinMode(SDIO, INPUT);
-
-    if (CS > 0)
-        pinMode(CS, OUTPUT);
-}
-
-void MX8650::begin(uint8_t sleepMode, uint8_t dpi, uint8_t imgRecRate) {
-    pinMode(SCLK, OUTPUT);
-    pinMode(SDIO, INPUT);
-
-    digitalWrite(SCLK, HIGH);                     
-    delayMicroseconds(5);
-    digitalWrite(SCLK, LOW);
-    delayMicroseconds(1);
     digitalWrite(SCLK, HIGH);
-    delay(100); // Wait for sensor ready
+    pinMode(SDIO, INPUT);
+    digitalWrite(SDIO, LOW);
 
     if (CS > 0)
         pinMode(CS, OUTPUT);
 
-    // Apply settings
-    writeToSPI(0x80 | SLEEP_MODE_ADDR, sleepMode);
-    writeToSPI(0x80 | DPI_ADDR, dpi);
-    writeToSPI(0x80 | 0x09, 0x5A); // Write protect for the register 0x0A~0x7F ?
+    writeToSPI(0x80 | SLEEP_MODE_ADDR, SLEEP_MODE_1);
+    writeToSPI(0x80 | DPI_ADDR, DPI_1200);
+    writeToSPI(0x80 | 0x09, 0x5A);
     writeToSPI(0x80 | IMG_THRES_ADDR, 0x04);
-    writeToSPI(0x80 | IMG_RECG_ADDR, imgRecRate);
+    writeToSPI(0x80 | IMG_RECG_ADDR, IMG_RATE_HIGH);
+
 }
 
 String MX8650::getLog()
@@ -203,66 +190,34 @@ void MX8650::setImageRecRate(uint8_t rate)
 
 uint8_t MX8650::transmitViaSerial(uint8_t addr, uint8_t wBit)
 {
-    uint8_t result = 0;
-
-    // Activate chip select (active LOW)
-    chipSelectState(LOW);
-
-    // --- Send address ---
-    pinMode(SDIO, OUTPUT);
-    for (int i = 7; i >= 0; i--)
-    {
-        digitalWrite(SCLK, LOW);
-        digitalWrite(SDIO, (addr >> i) & 0x01);
-        digitalWrite(SCLK, HIGH);
-    }
-
-    // Switch data line to input
-    pinMode(SDIO, INPUT);
-    delayMicroseconds(100); // tSRAD
-
-    // --- Read data ---
-    for (int i = 7; i >= 0; i--)
-    {
-        digitalWrite(SCLK, LOW);
-        digitalWrite(SCLK, HIGH);
-        result |= (digitalRead(SDIO) << i);
-    }
-
-    delayMicroseconds(100); // tSCLK-NCS
-
-    // Deactivate chip select
+    SPI.begin();
+    SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE1));
     chipSelectState(HIGH);
-
-    return result;
+    delay(10);
+    digitalWrite(SCLK, LOW);
+    SPI.transfer(addr);
+    pinMode(SDIO, INPUT);
+    byte data = SPI.transfer(wBit);
+    pinMode(SDIO, OUTPUT);
+    digitalWrite(SCLK, HIGH);
+    SPI.endTransaction();
+    chipSelectState(LOW);
+    SPI.end();
+    return static_cast<uint8_t>(data);
 }
 
 void MX8650::writeToSPI(uint8_t addr, uint8_t data)
 {
-    chipSelectState(LOW);
-
-    // --- Send address (write bit already set in addr if needed) ---
-    pinMode(SDIO, OUTPUT);
-    for (int i = 7; i >= 0; i--)
-    {
-        digitalWrite(SCLK, LOW);
-        digitalWrite(SDIO, (addr >> i) & 0x01);
-        digitalWrite(SCLK, HIGH);
-    }
-
-    // --- Send data ---
-    for (int i = 7; i >= 0; i--)
-    {
-        digitalWrite(SCLK, LOW);
-        digitalWrite(SDIO, (data >> i) & 0x01);
-        digitalWrite(SCLK, HIGH);
-    }
-
-    // Short delay before deactivating CS (tSCLK-NCS)
-    delayMicroseconds(100);
-
-    // Deactivate chip select
+    SPI.begin();
+    SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE1));
     chipSelectState(HIGH);
+    digitalWrite(SCLK, LOW);
+    pinMode(SDIO, OUTPUT);
+    SPI.transfer(addr);
+    SPI.transfer(data);
+    SPI.endTransaction();
+    chipSelectState(LOW);
+    SPI.end();
 }
 
 void MX8650::chipSelectState(uint8_t state)

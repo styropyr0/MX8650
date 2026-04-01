@@ -27,17 +27,6 @@ public:
      * @param CS Optional external CS pin. Commonly a transistor's base pin.
      */
     MX8650(uint8_t SCLK, uint8_t SDIO, uint8_t CS);
-
-    /**
-     * @brief Initializes the MX8650 with desired parameters.
-     * @param sleepMode    Sleep mode configuration (default: SLEEP_MODE_1).
-     * @param dpi          DPI setting (default: DPI_1200).
-     * @param imgRecRate   Image recognition rate (default: IMG_RATE_HIGH).
-     */
-    void begin(uint8_t sleepMode = SLEEP_MODE_1,
-            uint8_t dpi = DPI_1200,
-            uint8_t imgRecRate = IMG_RATE_HIGH);
-            
     /**
      * @brief Gets the log output from the controller.
      * @returns The log output as String.

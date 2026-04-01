@@ -7,13 +7,11 @@ void setup()
 {
     Serial.begin(9600);
     Serial.println("Initializing MX8650...");
-    mouseController.begin();
 }
 
 void loop()
 {
-    Serial.print("Motion Status: " + mouseController.getMotionStatus());
-    Serial.print("Delta X: " + String(mouseController.getDeltaX()) + "\t");
-    Serial.println("Delta Y: " + String(mouseController.getDeltaY()));
-    delay(100);
+    Serial.println("Motion Status: " + mouseController.getMotionStatus());
+    Serial.print("Delta X: " + mouseController.getDeltaX() + "\t");
+    Serial.println("Delta Y: " + mouseController.getDeltaY());
 }

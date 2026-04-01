@@ -96,7 +96,6 @@ MX8650 mouseController(13, 11);
 void setup() {
     Serial.begin(9600);
     Serial.println("Initializing MX8650...");
-    mouseController.Begin();  
     mouseController.Log();  // Print initialization log
 }
 
@@ -194,7 +193,7 @@ MX8650 mouseController(13, 11);
 void setup() {
     Serial.begin(9600);
     Serial.println("Initializing...");
-    mouseController.begin(DISABLE_SLEEP, DPI_1600, IMG_RATE_HIGHEST); // Set DPI to 1600
+    mouseController.setDPI(DPI_1200); // Set DPI to 1200
 }
 
 void loop() {
@@ -213,7 +212,6 @@ MX8650 mouseController(13, 11);
 
 void setup() {
     Serial.begin(9600);
-    mouseController.begin();
     mouseController.setSleepMode(SLEEP_MODE_1);
     mouseController.setSleepSetting_1(SLEEP_FREQ_LOW);
 }
